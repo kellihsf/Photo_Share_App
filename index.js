@@ -57,6 +57,31 @@ app.post('/users/:id', async (req, res) => {
     res.json(updatedUser);
 });
 
+// Get all users with their Photos
+app.get('/users/photos', async (req, res) => {
+    const photos = await User.findAll({
+        include: [{
+            model: Photo
+        }]
+    });
+    res.json(users);
+});
+
+// Add a new photo
+// app.post('/users/id', async (req, res) => {
+//     const { title, url } = req.body;
+//     const newPhoto = await Photo.create({
+//         title,
+//         url,
+//         userId
+//     });
+    
+//     // Send back the new photo's ID in the response:
+//     res.json({
+//         id: newPhoto.id
+//     });
+// })
+
 // Delete a user
 app.delete('/users/:id', async (req, res) => {
     const { id } = req.params;
